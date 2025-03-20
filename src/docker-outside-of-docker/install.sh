@@ -301,6 +301,7 @@ else
         if [ "${INSTALL_DOCKER_BUILDX}" = "true" ]; then
             buildx=(moby-buildx${buildx_version_suffix})
         fi
+        sudo sed -i.bak 's|http://deb.debian.org/debian|http://ftp.us.debian.org/debian|g' /etc/apt/sources.list
         apt-get -y install --no-install-recommends ${cli_package_name}${cli_version_suffix} "${buildx[@]}"
         apt-get -y install --no-install-recommends moby-compose || echo "(*) Package moby-compose (Docker Compose v2) not available for OS ${ID} ${VERSION_CODENAME} (${architecture}). Skipping."
     else
